@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private int PlayerJumpTime; //记录角色能跳跃的次数
     private float PlayerCurrentHealth; // 角色当前生命值
     private List<SignPaper> PlayerSignPaperList = new List<SignPaper>();//创建一个角色拥有的符咒的列表
+    public GameObject SignPaperForShootPrefab;//一个符咒实体
 
     private void Start()
     {
@@ -36,10 +37,12 @@ public class PlayerController : MonoBehaviour
             PlayerJumpTime = PlayerMaxJump;
         }
         //检测到c输入时报告当前符咒列表内符咒的数量
-        if (Input.GetKeyDown(KeyCode.C)){
+        if (Input.GetKeyDown(KeyCode.M)){
             Debug.Log(PlayerSignPaperList.Count);
         }
-
+        if(Input.GetKeyDown(KeyCode.C)){
+            UseSighPaper();
+        }
     }
 
     private void FixedUpdate()
@@ -79,6 +82,18 @@ public class PlayerController : MonoBehaviour
     //添加符咒
     public void AddSignPaper(SignPaper ReceiveSignpaper){
         PlayerSignPaperList.Add(ReceiveSignpaper);
+    }
+    //使用符咒（主要是攻击和射击）
+    public void UseSighPaper(){
+        GameObject SignPaperForShoot = Instantiate(SignPaperForShootPrefab, PlayerRigid.position + Vector2.up * 0.5f, Quaternion.identity);
+        if(SignPaperForShoot.GetComponent<SignPaperController>()!=null){
+            SignPaperController SignPaper = SignPaperForShoot.GetComponent<SignPaperController>();
+            SignPaper.PlayerSignPaper(Vector2.right, 300);
+        }
+        else{
+            Debug.Log(SignPaperForShoot.GetComponent<SignPaperController>());
+        }
+
     }
 
 }

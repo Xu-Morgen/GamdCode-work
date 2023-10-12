@@ -51,7 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerJumpForce: 15
   PlayerSpeed: 5
+  PlayerMaxHealth: 100
   PlayerMaxJump: 2
+  SignPaperForShootPrefab: {fileID: 5175767235580997466, guid: c51287c882ab5934b8ee6b8bc33fd583, type: 3}
 --- !u!212 &6104580256471494162
 SpriteRenderer:
   m_ObjectHideFlags: 0
